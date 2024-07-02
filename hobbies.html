@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hobbies</title>
+  <link rel="stylesheet" href="main.css">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Overall page background color */
+    body {
+      background-color: #1c1c1c;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Container for the sections */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* Section title */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+    }
+
+    .delete-section {
+      background: red;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+   /* Grid layout */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Box for each item */
+.grid-item {
+  position: relative;
+  width: calc(33.333% - 20px); /* Adjusted width */
+  height: 300px; /* Fixed height for grid item */
+  background: #333;
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background 0.5s;
+}
+
+.grid-item:hover {
+  transform: scale(1.05);
+}
+
+/* Image container */
+.grid-item .image-container {
+  width: 100%;
+  height: 100%; /* Full height of container */
+  overflow: hidden;
+  position: relative;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%; /* Full height of image */
+  object-fit: cover;
+  transition: transform 0.3s ease, opacity 0.5s ease;
+}
+
+.grid-item:hover img {
+  transform: scale(1.1);
+  opacity: 0.5;
+}
+
+/* Horizontal three dots menu */
+.three-dots {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Center items horizontally */
+  z-index: 1;
+}
+
+.three-dots span {
+  background-color: #444;
+  width: 20px; /* Width of each dot */
+  height: 2px; /* Height of each dot */
+  margin-right: 5px; /* Spacing between dots */
+}
+
+.three-dots-menu {
+  display: none;
+  position: absolute;
+  top: 30px; /* Adjust vertical position */
+  right: 10px;
+  background: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 1;
+}
+
+.three-dots-menu button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.three-dots-menu button:hover {
+  background: #555;
+}
+
+
+.grid-item h4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grid-item:hover h4 {
+  opacity: 1;
+}
+
+    /* Add box */
+    .add-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #444;
+      color: #fff;
+      font-size: 2em;
+      cursor: pointer;
+    }
+
+    .add-box:hover {
+      background: #555;
+    }
+
+    /* Three dots menu */
+    .three-dots {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    .three-dots-menu {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 10px;
+      background: #444;
+      color: #fff;
+      border-radius: 5px;
+      padding: 5px;
+      z-index: 1;
+    }
+
+    .three-dots-menu button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+
+    .three-dots-menu button:hover {
+      background: #555;
+    }
+
+    /* Add section button */
+    .add-section-btn {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .add-section-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Media query for responsiveness */
+    @media (max-width: 768px) {
+      .grid-item {
+        flex: 1 1 calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .grid-item {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hobbies Section -->
+  <section id="hobbies" class="hobbies section">
+    <div class="container">
+    
+
+      <div class="section-title" data-aos="fade-up">
+        <h2>Anime</h2>
+        
+      </div>
+      <div class="grid">
+        <div class="grid-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/dragonball.jpg" alt="Anime 1">
+            <h4>Dragon Ball</h4>
+          </div>
+        <div class="grid-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+          <div class="three-dots-menu">
+            <button onclick="deleteItem(this)">Delete</button>
+          </div>
+          <img src="assets/img/hobbies/anime/one piece.jpg" alt="Anime 1">
+          <h4>One Piece</h4>
+        </div>
+        <div class="grid-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+          <div class="three-dots-menu">
+            <button onclick="deleteItem(this)">Delete</button>
+          </div>
+          <img src="assets/img/hobbies/anime/naruto.jpg" alt="Anime 2">
+          <h4>Naruto</h4>
+        </div>
+        <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+          <div class="three-dots-menu">
+            <button onclick="deleteItem(this)">Delete</button>
+          </div>
+          <img src="assets/img/hobbies/anime/death note.jpg" alt="Anime 3">
+          <h4>Death Note</h4>
+        </div>
+        <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/windbreaker.png" alt="Anime 3">
+            <h4>Wind Breaker</h4>
+          </div>    
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/MHA.jpg" alt="Anime 3">
+            <h4>My Hero Academia</h4>
+          </div>  
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/demonsalyer.jpg" alt="Anime 3">
+            <h4>Demon Slayer</h4>
+          </div>  
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/hellsparadise.jpg" alt="Anime 3">
+            <h4>Hell's Paradise</h4>
+          </div> 
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/tokyorevengers.png" alt="Anime 3">
+            <h4>Tokyo Revengers</h4>
+          </div> 
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/tokyoghoul.jpg" alt="Anime 3">
+            <h4>Tokyo Ghoul</h4>
+          </div> 
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/haikyuu.jpg" alt="Anime 3">
+            <h4>Haikyuu</h4>
+          </div> 
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/jujutsukaisen.jpg" alt="Anime 3">
+            <h4>Jujutsu Kaisen</h4>
+          </div> 
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/sololeveling.avif" alt="Anime 3">
+            <h4>Solo Leveling</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/mashle.jpg" alt="Anime 3">
+            <h4>Mashle</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/monster.jpg  " alt="Anime 3">
+            <h4>Monster</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/onepuchman.jpg  " alt="Anime 3">
+            <h4>One Punch Man</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/gintama.jpg " alt="Anime 3">
+            <h4>Gintama</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/ninjakamui.jpeg " alt="Anime 3">
+            <h4>Ninja Kamui</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/tomodachigame.jpeg" alt="Anime 3">
+            <h4>Tomodachi Game</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/hunterxhunter.jpg" alt="Anime 3">
+            <h4>Hunter X Hunter</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/bleach.jpg" alt="Anime 3">
+            <h4>Bleach</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/chainsawman.jpg" alt="Anime 3">
+            <h4>Chainsaw Man</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/yourlieinapril.jpg" alt="Anime 3">
+            <h4>Your Lie In April</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/yourname.jpg" alt="Anime 3">
+            <h4>Your Name</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/weatheringwithyou.jpg" alt="Anime 3">
+            <h4>Weathering With You</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/howlsmvingcastle.jpeg" alt="Anime 3">
+            <h4>Howl's Moving Castle</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/spiritedaway.png" alt="Anime 3">
+            <h4>Spirited Away</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/attackontitan.jpg" alt="Anime 3">
+            <h4>Attack On Titan</h4>
+          </div>
+          <div class="grid-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="three-dots" onclick="toggleMenu(this)">⋮</div>
+            <div class="three-dots-menu">
+              <button onclick="deleteItem(this)">Delete</button>
+            </div>
+            <img src="assets/img/hobbies/anime/attackontitan.jpg" alt="Anime 3">
+            <h4>Attack On Titan</h4>
+          </div>
+        <div class="grid-item add-box" data-aos="fade-up" data-aos-delay="400" onclick="addItem(this)">
+          <span>+</span>
+        </div>
+        <!-- Add more anime items here -->
+      </div>
+    </div>
+  </section><!-- End Hobbies Section -->
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false,
+    });
+
+function addItem(addBox) {
+  var grid = addBox.parentElement;
+  var newItem = document.createElement('div');
+  newItem.className = 'grid-item';
+  newItem.setAttribute('data-aos', 'fade-up');
+  newItem.setAttribute('data-aos-delay', 500);
+
+  var threeDots = document.createElement('div');
+  threeDots.className = 'three-dots';
+  threeDots.onclick = function () {
+    toggleMenu(threeDots);
+  };
+
+  var threeDotsMenu = document.createElement('div');
+  threeDotsMenu.className = 'three-dots-menu';
+
+  var deleteBtnItem = document.createElement('button');
+  deleteBtnItem.textContent = 'Delete';
+  deleteBtnItem.onclick = function () {
+    deleteItem(deleteBtnItem);
+  };
+
+  threeDotsMenu.appendChild(deleteBtnItem);
+
+
+
+  newItem.appendChild(threeDots);
+  newItem.appendChild(threeDotsMenu);
+  newItem.appendChild(img);
+  newItem.appendChild(h4);
+
+  grid.insertBefore(newItem, addBox);
+
+  // Reinitialize AOS for new elements
+  AOS.refresh();
+}
+
+
+
+function deleteItem(button) {
+  var gridItem = button.closest('.grid-item');
+  gridItem.remove();
+  AOS.refresh();
+}
+
+
+  </script>
+</body>
+
+</html>
